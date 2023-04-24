@@ -1,12 +1,12 @@
 import { Component } from "react";
-import Date from "./Date";
+import DateComp from "./DateComp";
 import TodoList from "./TodoList";
 import AddInput from "./AddInput";
 
 export default class TodoContainer extends Component {
   render() {
     return <div className="TodoContainer">
-        <Date/>
+        <DateComp/>
         <TodoList/>
         <AddInput/>
         </div>;
