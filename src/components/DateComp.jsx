@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 
 export default function DateComp() {
-  let [date, setDate] = useState(new Date());
+  let date = new Date()
   // useEffect(() => {
   //   let timer = setInterval(() => setDate(new Date()), 1000);
 
@@ -24,25 +23,26 @@ export default function DateComp() {
     "DEC",
   ];
   const dayNames = [
+    "SUNDAY",
     "MONDAY",
     "TUESDAY",
     "WEDNESDAY",
     "THURSDAY",
     "FRIDAY",
     "SATURDAY",
-    "SUNDAY",
+    
   ];
-  console.log(date);
+  // console.log(date);
   return (
     <div className="Date">
       <div className="today-date">
         <div className="digit-container">{date.getDate()}</div>
         <div className="month-year-container">
-          <div className="month">{monthNames[date.getMonth() - 1]}</div>
+          <div className="month">{monthNames[date.getMonth()]}</div>
           <div className="year">{date.getFullYear()}</div>
         </div>
       </div>
-      <div className="day">{dayNames[date.getDay() - 1]}</div>
+      <div className="day">{dayNames[date.getDay()]}</div>
     </div>
   );
 }
