@@ -91,7 +91,6 @@ export default class TodoContainer extends Component {
     this.setState({
       list: JSON.parse(localStorage.getItem("TodoList")),
     });
-    console.log("Updated list");
   }
 
   // function to toggle the status of task done
