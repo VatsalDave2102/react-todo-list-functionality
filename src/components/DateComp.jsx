@@ -1,13 +1,7 @@
 
 export default function DateComp() {
   let date = new Date()
-  // useEffect(() => {
-  //   let timer = setInterval(() => setDate(new Date()), 1000);
 
-  //   return function cleanup() {
-  //     clearInterval(timer);
-  //   };
-  // });
   const monthNames = [
     "JAN",
     "FEB",
@@ -32,7 +26,7 @@ export default function DateComp() {
     "SATURDAY",
     
   ];
-  // console.log(date);
+  
   return (
     <div className="Date">
       <div className="today-date">

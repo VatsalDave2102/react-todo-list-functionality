@@ -7,11 +7,8 @@ import AddTasks from "/src/assets/Addtasks.png";
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
+    // reference to todo-list element
     this.list = React.createRef();
-
-     
-    // this.toggleHandler = this.toggleHandler.bind(this)
-    // this.updateTodoList = this.updateTodoList.bind(this)
   }
 
   componentDidMount() {
@@ -22,12 +19,14 @@ export default class TodoList extends Component {
   }
 
   componentDidUpdate() {
+    // condition for scroll
     if (this.props.listData.length > 7) {
       this.list.current.classList.add("todo-list-overflow");
     }
   }
 
   render() {
+    // if there are no tasks
     if (this.props.listData.length == 0) {
       return (
         <div className="empty-container">
@@ -39,15 +38,14 @@ export default class TodoList extends Component {
       return (
         <React.Fragment>
           <ul className="todo-list" ref={this.list}>
-            { this.props.listData.map((item) => {
+            {this.props.listData.map((item) => {
               return (
                 <TodoItem
                   key={item.id}
                   id={item.id}
-                   
                   task={item.task}
                   isDone={item.isDone}
-                  updateStatus = {this.props.updateStatus}
+                  updateStatus={this.props.updateStatus}
                 />
               );
             })}
@@ -60,5 +58,5 @@ export default class TodoList extends Component {
 
 TodoList.propTypes = {
   listData: PropTypes.array,
-  updateStatus: PropTypes.func
+  updateStatus: PropTypes.func,
 };

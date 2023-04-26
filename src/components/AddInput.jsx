@@ -7,6 +7,7 @@ export default function AddInput({getNewTodo}) {
   const inputBtnRef = useRef();
   const inputFieldRef = useRef();
 
+  // changing state of input button
   function toggleBtn() {
     setHideBtn(true);
   }
@@ -28,8 +29,9 @@ export default function AddInput({getNewTodo}) {
   }, [hideBtn]);
 
   useEffect(() => {
+    // function to handle keys pressed
     function keyHandler(event) {
-      // if escape key is pressed
+      // if escape key is pressed show input button and empty input field
       if (event.key == "Escape" && hideBtn) {
         setHideBtn(false);
         inputBtnRef.current.classList.remove("hidden");
@@ -39,7 +41,7 @@ export default function AddInput({getNewTodo}) {
         console.log("escaped");
         setNewTodo("");
       }
-      // if enter key is pressed
+      // if enter key is pressed, pass newTodo to TodoContainer component
       if (event.key == "Enter" && hideBtn) {
         if (newTodo.length == 0) {
           alert("Cannot add empty todo");
@@ -49,12 +51,17 @@ export default function AddInput({getNewTodo}) {
         }
       }
     }
+
+    // adding eventListener to window
     window.addEventListener("keyup", keyHandler);
+
+    // removing eventListener as cleanup
     return () => {
       window.removeEventListener("keyup", keyHandler);
     };
   });
-  // function to handle user input and store it
+
+  // function to handle user input and store it in newTodo
   function handleInput(e) {
     let input = e.target.value;
     setNewTodo(input);
