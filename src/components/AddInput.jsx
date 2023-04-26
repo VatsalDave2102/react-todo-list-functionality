@@ -1,7 +1,7 @@
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
-export default function AddInput({getNewTodo}) {
+export default function AddInput({ getNewTodo }) {
   const [hideBtn, setHideBtn] = useState(false);
   const [newTodo, setNewTodo] = useState("");
   const inputBtnRef = useRef();
@@ -18,7 +18,7 @@ export default function AddInput({getNewTodo}) {
     inputBtnRef.current.classList.add("hidden");
     inputFieldRef.current.classList.remove("hidden");
     inputFieldRef.current.classList.add("visible");
-    inputFieldRef.current.focus()
+    inputFieldRef.current.focus();
   }
 
   // useEffect hook to run when hideBtn changes
@@ -44,9 +44,14 @@ export default function AddInput({getNewTodo}) {
       if (event.key == "Enter" && hideBtn) {
         if (newTodo.length == 0) {
           alert("Cannot add empty todo");
-        } else {
-          getNewTodo(newTodo)
+        } else if (!newTodo.replace(/\s/g, "").length) {
+           alert(
+            "Task only contains whitespace (ie. spaces, tabs or line breaks)"
+          );
           setNewTodo('')
+        } else {
+          getNewTodo(newTodo.trim());
+          setNewTodo("");
         }
       }
     }
@@ -87,5 +92,5 @@ export default function AddInput({getNewTodo}) {
 }
 
 AddInput.propTypes = {
-  getNewTodo: PropTypes.func
-}
+  getNewTodo: PropTypes.func,
+};
