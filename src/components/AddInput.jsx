@@ -38,7 +38,6 @@ export default function AddInput({getNewTodo}) {
         inputBtnRef.current.classList.add("visible");
         inputFieldRef.current.classList.remove("visible");
         inputFieldRef.current.classList.add("hidden");
-        console.log("escaped");
         setNewTodo("");
       }
       // if enter key is pressed, pass newTodo to TodoContainer component
