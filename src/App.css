@@ -1,5 +1,5 @@
-*{
-  padding:0;
+* {
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
   color: rgb(95, 95, 95);
@@ -10,105 +10,129 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  
-
 }
-body{
+body {
   background-color: rgb(235, 229, 223);
 }
- .TodoContainer{
+.TodoContainer {
   width: 420px;
   background-color: white;
-  padding:50px;
+  padding: 50px;
   padding-bottom: 0;
   box-shadow: 0px 5px 25px 2px gray;
- }
- .Date{
+}
+.Date {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  
- }
+}
 
- .Date .today-date{
+.Date .today-date {
   display: flex;
   align-items: center;
   justify-content: center;
- }
+}
 
- .Date .today-date .digit-container{
+.Date .today-date .digit-container {
   font-weight: 900;
   font-size: 2.8rem;
   margin-right: 5px;
- }
- .Date .month-year-container{
+}
+.Date .month-year-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
- }
+}
 
- .Date .month-year-container .month{
+.Date .month-year-container .month {
   font-size: 18px;
   font-weight: bolder;
- }
- .Date .month-year-container .year{
+}
+.Date .month-year-container .year {
   font-size: 16px;
- }
- .Date .day{
+}
+.Date .day {
   font-weight: bolder;
- }
- .todo-list{
+}
+.todo-list {
   list-style: none;
-  max-height: 451px;
+  height: 451px;
   overflow-y: auto;
   scrollbar-width: none;
-
- }
- .todo-list-overflow{
- box-shadow: 0px -10px 20px -20px gray inset;
-  
- }
- .todo-list::-webkit-scrollbar{
+}
+.empty-container {
+  height: 451px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.empty-container img {
+  width: 200px;
+  opacity: 0.7;
+}
+.empty-container h1 {
+  font-size: 25px;
+}
+.todo-list-overflow {
+  box-shadow: 0px -10px 20px -20px gray inset;
+}
+.todo-list::-webkit-scrollbar {
   display: none;
- }
- .todo-list .item{
+}
+.todo-list .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 0;
- }
- .input-container{
+  padding: 18px 5px;
+  transition: background-color 0.5s ease;
+ 
+}
+.todo-list .item li{
+  text-overflow: ellipsis;
+  max-width: 14rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.todo-list .item:hover {
+  background-color: rgb(213, 213, 213);
+}
+.input-container {
   position: relative;
   padding: 30px 0;
- }
- .input-button{
+}
+.input-button {
   position: absolute;
   top: 55.5%;
   left: 35.5%;
   border-radius: 50%;
   border: none;
-  background-color: rgba(80,227,164,255);
+  background-color: rgba(80, 227, 164, 255);
   padding: 25px 25px;
   cursor: pointer;
   transition: 0.5s background-color;
- }
- .input-button:hover{
-  background-color:rgb(74, 74, 74) ;
-   
- }
- .plus{
-  font-size: 2.5rem;
-  color: rgba(70,188,138,255)
- }
-.new-todo{
-  width: 100%;
+}
+.visible {
+  visibility: visible;
+}
+.hidden {
   visibility: hidden;
+}
+.input-button:hover {
+  background-color: rgb(74, 74, 74);
+}
+.plus {
+  font-size: 2.5rem;
+  color: rgba(70, 188, 138, 255);
+}
+.new-todo {
+  width: 100%;
   border: none;
-  border-bottom:1px solid rgb(95, 95, 95);
+  border-bottom: 3px solid rgba(70, 188, 138, 255);
   padding: 10px 0;
- }
- .new-todo:focus{
+}
+.new-todo:focus {
   outline: none;
- }
+}
