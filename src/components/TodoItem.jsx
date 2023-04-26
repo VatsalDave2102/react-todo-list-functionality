@@ -2,11 +2,9 @@ import PropTypes from "prop-types";
 import logo from "/src/assets/Green-circle.ico";
 import greyLogo from "/src/assets/Grey-circle.png";
 // import doneLogo from '/src/assets/Grey-circle.png'
-export default function TodoItem({id, task, isDone, onToggleDone}) {
+export default function TodoItem({id,task, isDone,updateStatus}) {
   function handleClick(){
-    isDone = !isDone
-    // console.log(isDone)
-    onToggleDone(id,task, isDone)
+      updateStatus(id, isDone)
   }
   if (isDone) {
     let listStyles = { color: "#cccccc" };
@@ -36,5 +34,6 @@ TodoItem.propTypes = {
   id: PropTypes.number,
   task: PropTypes.string,
   isDone: PropTypes.bool,
-  onToggleDone: PropTypes.func
+  updateStatus: PropTypes.func,
+  
 };
