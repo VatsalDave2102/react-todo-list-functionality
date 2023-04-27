@@ -7,53 +7,30 @@ export default function TodoItem({ id, task, isDone, updateStatus }) {
   function handleClick() {
     updateStatus(id, isDone);
   }
-  if (isDone) {
-    let listStyles = { color: "#909090" };
-    return (
-      <>
-        <div className="item">
-          <li
-            style={listStyles}
-            data-tooltip-id="my-tooltip"
-            data-tooltip-content={task.length > 23 ? task : undefined}
-          >
-            {task}
-          </li>
 
-          <input
-            type="image"
-            src={logo}
-            alt=""
-            width={30}
-            height={30}
-            onClick={handleClick}
-          />
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className="item">
-          <li
-            data-tooltip-id="my-tooltip"
-            data-tooltip-content={task.length > 23 ? task : undefined}
-          >
-            {task}
-          </li>
+  return (
+    <>
+      <div className="item" onClick={handleClick}>
+        <li
+          style={isDone ? { color: "#909090" } : undefined}
+          data-tooltip-id="my-tooltip"
+          data-tooltip-content={task.length > 23 ? task : undefined}
+        >
+          {task}
+        </li>
 
-          <input
-            type="image"
-            src={greyLogo}
-            height={30}
-            style={{ opacity: 0.7 }}
-            onClick={handleClick}
-          />
-        </div>
+        <input
+          type="image"
+          src={isDone ? logo : greyLogo}
+          alt=""
+          width={30}
+          height={30}
+          
+        />
         <Tooltip id="my-tooltip" />
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 TodoItem.propTypes = {
