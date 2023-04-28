@@ -49,7 +49,7 @@ export default function AddInput({ getNewTodo }) {
     return () => {
       window.removeEventListener("keyup", keyHandler);
     };
-  });
+  },[hideBtn]);
 
   // function to handle form submission
   function submitHandler(e){

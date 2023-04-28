@@ -37,19 +37,19 @@ export default class TodoList extends Component {
     } else {
       return (
         <React.Fragment>
-          <ul className="todo-list" ref={this.list}>
-            {this.props.listData.map((item) => {
-              return (
-                <TodoItem
-                  key={item.id}
-                  id={item.id}
-                  task={item.task}
-                  isDone={item.isDone}
-                  updateStatus={this.props.updateStatus}
-                />
-              );
-            })}
-          </ul>
+              <ul className="todo-list" ref={this.list}>
+              {this.props.listData.map((item) => {
+                return (
+                  <TodoItem
+                    key={item.id}
+                    id={item.id}
+                    task={item.task}
+                    isDone={item.isDone}
+                    updateStatus={this.props.updateStatus}
+                  />
+                );
+              })}
+            </ul>
         </React.Fragment>
       );
     }

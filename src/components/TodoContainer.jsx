@@ -2,13 +2,12 @@ import { Component } from "react";
 import DateComp from "./DateComp";
 import TodoList from "./TodoList";
 import AddInput from "./AddInput";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-export default class TodoContainer extends Component {
+class TodoContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      list: [],
-    };
 
     this.handleNewInput = this.handleNewInput.bind(this);
     this.toggleHandler = this.toggleHandler.bind(this);
@@ -19,15 +18,12 @@ export default class TodoContainer extends Component {
 
   componentDidMount() {
     let storedList = JSON.parse(localStorage.getItem("TodoList"));
-
     // all tasks will expire when date changes
     this.expirationTrigger(storedList);
 
     // if task already exists when mounting, store them in state
     if (storedList != null) {
-      this.setState({
-        list: storedList,
-      });
+      this.props.add(storedList);
     }
   }
 
@@ -49,7 +45,7 @@ export default class TodoContainer extends Component {
   // function to handle new todo input
   handleNewInput(newTodo) {
     let date = new Date();
-    if (this.state.list.length == 0) {
+    if (this.props.list.length == 0) {
       // for first todo
       this.firsTodoHandler(date, newTodo);
     } else {
@@ -70,16 +66,14 @@ export default class TodoContainer extends Component {
       },
     ];
     localStorage.setItem("TodoList", JSON.stringify(tempList));
-    this.setState({
-      list: JSON.parse(localStorage.getItem("TodoList")),
-    });
+    this.props.add(JSON.parse(localStorage.getItem("TodoList")));
   }
 
   // function to add remaingin todos in localStorage with appending current todos and set the state from localStorage
   restTodoHandler(date, newTodo) {
     // temporary list object
     let tempList = [
-      ...this.state.list,
+      ...this.props.list,
       {
         id: date.getTime(),
         task: newTodo,
@@ -87,10 +81,9 @@ export default class TodoContainer extends Component {
         createdAt: date.getDate(),
       },
     ];
+    // this.props.add(tempList)
     localStorage.setItem("TodoList", JSON.stringify(tempList));
-    this.setState({
-      list: JSON.parse(localStorage.getItem("TodoList")),
-    });
+    this.props.add(JSON.parse(localStorage.getItem("TodoList")));
   }
 
   // function to toggle the status of task done
@@ -104,9 +97,8 @@ export default class TodoContainer extends Component {
     // storing it in localStorage
     localStorage.setItem("TodoList", JSON.stringify(targetList));
     // setting state from localStorage
-    this.setState({
-      list: JSON.parse(localStorage.getItem("TodoList")),
-    });
+
+    this.props.add(JSON.parse(localStorage.getItem("TodoList")));
   }
 
   render() {
@@ -114,7 +106,7 @@ export default class TodoContainer extends Component {
       <div className="TodoContainer">
         <DateComp />
         <TodoList
-          listData={this.state.list}
+          listData={this.props.list}
           updateStatus={this.toggleHandler}
         />
         <AddInput getNewTodo={this.handleNewInput} />
@@ -122,3 +114,25 @@ export default class TodoContainer extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    list: state.list,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    empty: () => dispatch({ type: "EMPTY" }),
+    add: (value) => dispatch({ type: "ADD", newTodo: value }),
+  };
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
+
+TodoContainer.propTypes = {
+  list: PropTypes.array,
+  add: PropTypes.func,
+  empty: PropTypes.func,
+};
