@@ -1,26 +1,24 @@
-import { createStore } from "redux";
+// import { createStore } from "redux";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
+const initialState = { list: [] };
 
-const initialState = { list:  [] };
-const reducer = (state = initialState, action) => {
-  // console.log(state.list);
-  if (action.type == "EMPTY") {
-    return {
-      list: [],
-    };
-  }
-  if (action.type == "ADD") {
-    return {
-      list: action.newTodo,
-    };
-  }
-  // if (action.type == "APPEND") {
-  //   return {
-  //     list:  action.newTodo
-  //   };
-  // }
-  return state
-};
+const listSlice = createSlice({
+  name: "list",
+  initialState: initialState,
+  reducers: {
+    empty(state) {
+      state.list = "";
+    },
+    add(state, action) {
+      state.list = action.payload;
+    },
+  },
+});
+ 
 //  creating store for list
-const store = createStore(reducer);
+const store = configureStore({
+  reducer: listSlice.reducer,
+});
 
+export const listActions = listSlice.actions;
 export default store;

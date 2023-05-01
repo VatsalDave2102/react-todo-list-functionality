@@ -4,6 +4,7 @@ import TodoList from "./TodoList";
 import AddInput from "./AddInput";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { listActions } from "../store/store";
 
 class TodoContainer extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class TodoContainer extends Component {
 
     // if task already exists when mounting, store them in state
     if (storedList != null) {
-      this.props.add(storedList);
+      this.props.add(JSON.parse(localStorage.getItem("TodoList")));
     }
   }
 
@@ -123,8 +124,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    empty: () => dispatch({ type: "EMPTY" }),
-    add: (value) => dispatch({ type: "ADD", newTodo: value }),
+    empty: () => dispatch(listActions.empty()),
+    add: (value) => dispatch( listActions.add(value)),
   };
 };
 
